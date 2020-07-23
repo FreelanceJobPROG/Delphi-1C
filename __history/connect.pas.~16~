@@ -1,0 +1,79 @@
+unit connect;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,DM;
+
+type
+  TFConnect = class(TForm)
+    Label1: TLabel;
+    Name: TEdit;
+    Label2: TLabel;
+    DB: TEdit;
+    Button1: TButton;
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+
+    D1C8: variant;
+  end;
+
+var
+  FConnect: TFConnect;
+
+implementation
+
+{$R *.dfm}
+
+function ConnectTo1C8_Application(s1cAppProgID, InitLine : string;) : Variant;
+//Соединение с 1Cv8 (OLE)
+//s1cAppProgID - имя 1Cv8, как сервера OLE Automation "V8.Application" (может быть пустым))
+//InitLine - строка инициализации
+//Visible - если TRUE, то после запуска 1Cv8 окно программы ставновится видимым
+//Возвращаемое значение : ссылка на 1Cv8, как сервер OLE Automation
+//                        или значение Unassigned (в случае неудачи)
+Var
+  s1CResOpen : integer;
+begin
+  Result:=Unassigned;
+  s1cAppProgID:=Trim(s1cAppProgID);
+  if Length(s1cAppProgID)<=0 then s1cAppProgID:='';    //  V8.Application
+  InitLine:=Trim(InitLine);
+  if Length(s1cAppProgID)>0 then begin
+     //Создаем соединение (соотв.COM-объект)
+     Result := CreateOleObject(s1cAppProgID);
+     //Проверяем корректность соединения
+     if YesLinkToVariant(Result) then begin
+        //Инициализация системы 1Cv8
+        s1CResOpen:=Result.Connect(InitLine);
+     end;
+  end;
+end;
+
+function YesLinkToVariant(HandleAny : Variant) : boolean;
+//Проверяет, корректна ли ссылка (HandleAny)
+begin
+  Result:=FALSE;
+  if not VarIsEmpty(HandleAny) then Result:=TRUE;
+end;
+
+
+procedure TFConnect.Button1Click(Sender: TObject);
+begin
+  D1C8:=UnAssigned;
+  D1C8:=ConnectTo1C8_Application(Trim(Name.Text),
+                                     Trim(Edit_Init.Text));
+  if YesLinkToVariant(FDM) then begin
+    ShowMessage('Есть соединение');
+    FDM.D1C8:=D1C8;
+  end
+  else begin
+    ShowMessage('Ошибка');
+  end;
+end;
+
+end.

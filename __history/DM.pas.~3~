@@ -1,0 +1,26 @@
+unit DM;
+
+interface
+
+uses
+  System.SysUtils, System.Classes;
+
+type
+  TFDM = class(TDataModule)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+
+  end;
+
+var
+  FDM: TFDM;
+  D1C8 : variant;
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

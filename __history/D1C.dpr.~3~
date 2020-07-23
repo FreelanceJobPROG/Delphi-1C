@@ -1,0 +1,16 @@
+program D1C;
+
+uses
+  Vcl.Forms,
+  Menu in 'Menu.pas' {FMenu},
+  connect in 'connect.pas' {FConnect};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TFMenu, FMenu);
+  Application.CreateForm(TFConnect, FConnect);
+  Application.Run;
+end.

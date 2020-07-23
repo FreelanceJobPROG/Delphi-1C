@@ -1,0 +1,14 @@
+program D1C;
+
+uses
+  Vcl.Forms,
+  Menu in 'Menu.pas' {Form2};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm2, Form2);
+  Application.Run;
+end.

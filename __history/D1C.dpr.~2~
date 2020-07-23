@@ -1,0 +1,16 @@
+program D1C;
+
+uses
+  Vcl.Forms,
+  Menu in 'Menu.pas' {Form2},
+  connect in 'connect.pas' {FConnect};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm2, Form2);
+  Application.CreateForm(TFConnect, FConnect);
+  Application.Run;
+end.

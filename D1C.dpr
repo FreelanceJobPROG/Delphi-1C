@@ -1,0 +1,17 @@
+program D1C;
+
+uses
+  Vcl.Forms,
+  Menu in 'Menu.pas' {FMenu},
+  connect in 'connect.pas' {FConnect},
+  DM in 'DM.pas' {FDM: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TFMenu, FMenu);
+  Application.CreateForm(TFDM, FDM);
+  Application.Run;
+end.
